@@ -1,5 +1,122 @@
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>🚌 منصة سبل - رحلات مصر إلى السودان</title>
+
+  <!-- خطوط وأيقونات وLeaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">🚌 منصة سبل - العودة الطوعية للسودان</h1>
+      <div class="contact">
+        <span id="notificationCount">0 جديد</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <aside class="sidebar">
+      <nav>
+        <a class="menu-item active" data-section="dashboard">لوحة التحكم</a>
+        <a class="menu-item" data-section="trips">الرحلات النشطة</a>
+        <a class="menu-item" data-section="tracking">تتبع الشحنات</a>
+        <a class="menu-item" data-section="meals">مواعيد الأكل</a>
+        <a class="menu-item" data-section="reports">التقارير</a>
+        <a class="menu-item" data-section="settings">الإعدادات</a>
+      </nav>
+
+      <div class="quick-actions">
+        <button id="addShipmentBtn" class="btn">إضافة شحنة</button>
+        <button id="addMealBtn" class="btn">إضافة وجبة</button>
+        <button id="startJourneyBtn" class="btn">بدء رحلة</button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <section class="search-card card">
+        <h2>بحث الرحلات</h2>
+        <div class="row">
+          <input id="fromCity" placeholder="من" class="input" />
+          <input id="toCity" placeholder="إلى" class="input" />
+          <input id="shipmentDate" type="date" class="input" />
+          <input id="weight" placeholder="وزن الشحنة (كجم)" class="input" />
+          <button id="searchBtn" class="btn">بحث</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <div class="stat card">
+          <div class="stat-value" id="activeShipments">0</div>
+          <div class="stat-label">الشحنات النشطة</div>
+        </div>
+        <div class="stat card">
+          <div class="stat-value" id="successRate">0%</div>
+          <div class="stat-label">نسبة النجاح</div>
+        </div>
+        <div class="stat card">
+          <div class="stat-value" id="activeTripsCount">0</div>
+          <div class="stat-label">عدد الرحلات</div>
+        </div>
+        <div class="stat card">
+          <div class="stat-value" id="remainingTime">00:00</div>
+          <div class="stat-label">الوقت المتبقي</div>
+        </div>
+      </section>
+
+      <section class="map-card card">
+        <div id="trackingMap" style="height:400px; width:100%; border-radius:12px; overflow:hidden"></div>
+        <div class="map-controls">
+          <button id="zoomInBtn" class="btn small">+</button>
+          <button id="zoomOutBtn" class="btn small">-</button>
+          <button id="centerMapBtn" class="btn small">مركّز</button>
+          <button id="showRouteBtn" class="btn small">عرض المسار</button>
+        </div>
+      </section>
+
+      <section class="journey-card card">
+        <div class="row space-between">
+          <div>
+            <h3>ساعة الرحلة</h3>
+            <div id="journeyClock" class="journey-clock">18:22:45</div>
+            <div class="progress-bar"><div id="mealProgress" class="progress-fill" style="width:85%"></div></div>
+          </div>
+          <div>
+            <h3>الموقع الحالي</h3>
+            <div id="currentLocation">---</div>
+          </div>
+        </div>
+
+        <div class="row actions">
+          <button id="refreshClockBtn" class="btn">تحديث الساعة</button>
+          <button id="pauseJourneyBtn" class="btn">إيقاف مؤقت</button>
+          <button id="resumeJourneyBtn" class="btn">استئناف</button>
+        </div>
+      </section>
+
+      <section class="footer-actions">
+        <button id="createInvoiceBtn" class="btn">إنشاء فاتورة</button>
+        <button id="viewReportsBtn" class="btn">التقارير</button>
+        <button id="systemSettingsBtn" class="btn">إعدادات النظام</button>
+        <button id="contactSupportBtn" class="btn">اتصل بالدعم</button>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2026 منصة سبل - تم التطوير بواسطة mohey developer
+    </div>
+  </footer>
+
+  <!-- مكتبات JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
